@@ -76,3 +76,36 @@ Note: While the API currently supports custom messages, we don't currently have 
 Rather than just redefine all of MultiTests features here, we aim to highlight only `App`. As you start to build exploits you may find the MultiTest docs most useful.
 
 ### Examples 
+
+There are two ways you could use the framework, either simply importing it into the cargo project you intend to pentest against or make a new cargo package and import both this framework and whatever protocols you intend to work with (assuming you have access to source code). Here is an example covering method 2: 
+
+#### Setup cargo package 
+Create a new cargo package playground: 
+
+`mkdir exploit-playground`
+
+`cd exploit-playground`
+
+`cargo init`
+
+And then import both the framework and your local set of cargo contracts. Note the `path` param must be used when working with local cargo contracts:
+
+```toml
+[dependencies]
+cw-poc-framework = {version="0.1.0"}
+protocol-that-integrates-with-terraswap = { version = "0.0.0", path = "./location_to_my_cool_local_contract" }
+```
+
+The above will ensure that you have access to all the tools within the POC framework, the protocol you intend to work with and also a bunch of test related tools for cosmwasm. From here we can start to define some exploits-as-code!
+
+#### Writing your first coded exploit 
+
+
+```rust
+use cw_poc_framework::mocks::{mock_app, init_apps};
+
+fn main(){
+    let mut app = mock_app();
+    let contracts = init_contracts(app);
+}
+```

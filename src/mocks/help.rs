@@ -4,7 +4,6 @@ use terra_mocks::TerraMockQuerier;
 use terra_multi_test::{App, BankKeeper, ContractWrapper, Executor};
 use terraswap::asset::{AssetInfo, PairInfo};
 
-
 pub struct BaseContracts {
     pub anchor_token: Addr,
     pub anc_ust_pair: Addr,
@@ -47,7 +46,6 @@ pub fn init_contracts(app: &mut App) -> BaseContracts {
             None,
         )
         .unwrap();
-   
 
     // Instantiate the terraswap pair
     let (pair, lp) = instantiate_pair(app, &owner.clone(), &anchor_token_instance);
@@ -67,8 +65,6 @@ pub fn mock_app() -> App<Empty> {
         TerraMockQuerier::new(MockQuerier::new(&[(MOCK_CONTRACT_ADDR, &[])]));
 
     App::new(api, env.block, bank, MockStorage::new(), custom_querier)
-    // let custom_handler = CachingCustomHandler::<CustomMsg, Empty>::new();
-    // AppBuilder::new().with_custom(custom_handler).build()
 }
 
 /// Create terraswap ANC/UST pair
