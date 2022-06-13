@@ -1,4 +1,4 @@
-use cw_multi_test::{next_block, Contract, App, ContractWrapper};
+use cw_multi_test::{next_block, ContractFn, Contract, App, ContractWrapper};
 use cosmwasm_std::{Empty};
 
 use cw20_base;
@@ -32,7 +32,7 @@ fn setup_and_store_contract(app: &mut App, setup_fn: fn() -> Box<dyn Contract<Em
     app.store_code(setup_fn())
 }
 
-pub fn store_token_code(app: &mut App, platform: Option<AvailablePlatforms>) -> u64 {
+pub fn store_token_code(app: &mut App, platform: Option<AvailablePlatforms> ) -> u64 {
     let wrapped_token_contract: Box<dyn Contract<Empty>>;
     match platform.unwrap_or(AvailablePlatforms::ASTROPORT) {
         
@@ -42,15 +42,15 @@ pub fn store_token_code(app: &mut App, platform: Option<AvailablePlatforms>) -> 
             astroport_token::contract::instantiate,
             astroport_token::contract::query,
         ));
-        }
+        },
         AvailablePlatforms::TERRASWAP => {
             wrapped_token_contract = Box::new(ContractWrapper::new_with_empty(
-            terraswap_token::contract::execute,
-            terraswap_token::contract::instantiate,
-            terraswap_token::contract::query,
+                terraswap_token::contract::execute,
+                cw20_base::contract::instantiate,
+                terraswap_token::contract::query,
         ));
-        }
-        (_) => panic!("Unsupported platform")
+        },
+        _ => panic!("Unsupported platform"),
     }
 
     app.store_code(wrapped_token_contract)
@@ -74,13 +74,13 @@ pub fn store_pair_code(app: &mut App, platform: Option<AvailablePlatforms>) -> u
                 terraswap_pair::contract::query,
             ));
             }
-        (_) => panic!("Unsupported platform")
+        _ => panic!("Unsupported platform")
     }
     
     app.store_code(pair_contract)
 }
 
-fn store_factory_code(app: &mut App, platform: Option<AvailablePlatforms>) -> u64 {
+pub fn store_factory_code(app: &mut App, platform: Option<AvailablePlatforms>) -> u64 {
     let factory_contract: Box<dyn Contract<Empty>>;
 
     match platform.unwrap_or(AvailablePlatforms::ASTROPORT) {

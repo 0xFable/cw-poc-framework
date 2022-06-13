@@ -9,7 +9,8 @@ edition = "2021"
 cw-multi-test = "0.13.4"
 cw20-base = { version = "0.13.4", features = ["library"] }
 cosmwasm-std = "1.0.0"
-
+schemars = "0.8"
+serde = { version = "1.0.125", default-features = false, features = ["derive"] }
 
 # Project imports 
 
