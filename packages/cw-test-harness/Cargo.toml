@@ -7,3 +7,5 @@ edition = "2021"
 
 [dependencies]
 cw-multi-test = "0.13.4"
+cw20-base = { version = "0.13.4", features = ["library"] }
+cosmwasm-std = "1.0.0"
