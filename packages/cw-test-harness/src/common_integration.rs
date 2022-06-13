@@ -17,20 +17,27 @@ pub enum AvailablePlatforms{
 
 pub fn contract_cw20_token() -> Box<dyn Contract<Empty>> {
     // Instantiate cw20 Token Contract
-    let whale_token_contract = ContractWrapper::new_with_empty(
+    let token_contract = ContractWrapper::new_with_empty(
         cw20_base::contract::execute,
         cw20_base::contract::instantiate,
         cw20_base::contract::query,
     );
-    Box::new(whale_token_contract)
+    Box::new(token_contract)
+}
+
+// A more generic abstraction of the setup and store process. 
+// For this fn, pass a preexisting setup func, you know what you need but ensure the result is a
+// Box<dyn Contract<Empty>> of some variant so that we can directly store it for you and return the code ID
+fn setup_and_store_contract(app: &mut App, setup_fn: fn() -> Box<dyn Contract<Empty>>) -> u64 {
+    app.store_code(setup_fn())
 }
 
 pub fn store_token_code(app: &mut App, platform: Option<AvailablePlatforms>) -> u64 {
-    let wrapped_token_contract;
+    let wrapped_token_contract: Box<dyn Contract<Empty>>;
     match platform.unwrap_or(AvailablePlatforms::ASTROPORT) {
         
         AvailablePlatforms::ASTROPORT => {
-         wrapped_token_contract = Box::new(ContractWrapper::new_with_empty(
+             wrapped_token_contract = Box::new(ContractWrapper::new_with_empty(
             astroport_token::contract::execute,
             astroport_token::contract::instantiate,
             astroport_token::contract::query,
@@ -73,7 +80,6 @@ pub fn store_pair_code(app: &mut App, platform: Option<AvailablePlatforms>) -> u
     app.store_code(pair_contract)
 }
 
-#[allow(dead_code)]
 fn store_factory_code(app: &mut App, platform: Option<AvailablePlatforms>) -> u64 {
     let factory_contract: Box<dyn Contract<Empty>>;
 
