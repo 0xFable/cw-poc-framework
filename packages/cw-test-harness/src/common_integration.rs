@@ -1,4 +1,4 @@
-use cw_multi_test::{next_block, ContractFn, Contract, App, ContractWrapper};
+use cw_multi_test::{next_block, Contract, App, ContractWrapper};
 use cosmwasm_std::{Empty};
 
 use cw20_base;
@@ -105,7 +105,7 @@ pub fn store_factory_code(app: &mut App, platform: Option<AvailablePlatforms>) -
                 .with_reply(terraswap_factory::contract::reply),
             );
         }
-        (_) => panic!("Unsupported platform")
+        _ => panic!("Unsupported platform")
     }
     
     app.store_code(factory_contract)
