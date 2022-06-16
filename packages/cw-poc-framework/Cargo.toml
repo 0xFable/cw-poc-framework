@@ -6,3 +6,19 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+cw-multi-test = "0.13.4"
+cw20-base = { version = "0.13.4", features = ["library"] }
+cosmwasm-std = "1.0.0"
+schemars = "0.8"
+serde = { version = "1.0.125", default-features = false, features = ["derive"] }
+anyhow = "1"
+cw20 = { version = "0.13" }
+
+# Project imports 
+cw-test-harness = { version = "0.1.0", path = "../cw-test-harness"}
+
+## Terraswap
+terraswap-factory = { version = "0.0.0", git = "https://github.com/terraswap/terraswap" }
+terraswap-pair = { version = "0.0.0", git = "https://github.com/terraswap/terraswap" }
+terraswap-token = { version = "0.0.0", git = "https://github.com/terraswap/terraswap" }
+terraswap = { version = "2.6.1", git = "https://github.com/terraswap/terraswap" }

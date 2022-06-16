@@ -101,11 +101,14 @@ The above will ensure that you have access to all the tools within the POC frame
 #### Writing your first coded exploit 
 
 
-```rust
-use cw_poc_framework::mocks::{mock_app, init_apps};
+##### Defining Scenarios 
 
-fn main(){
-    let mut app = mock_app();
-    let contracts = init_contracts(app);
-}
-```
+Scenarios is the opinionated term used to create a repeatable environment with certain entities and rules established. They are crucial in proving out your discoveries in code if you do not want to expose the public to a potential vuln with your failed probing attempts. With this in mind, you can create a scenario which represents the exact environment you intend to perform your tests against. This helps provide you the auditor or exploiter with some assurance that when you bring your discovery on chain it will remain valid. 
+
+Scenarios provide a very valuable way to look at testing too :-)
+
+##### Writing custom controllers 
+
+Controllers are provided by the dependency `cw-test-harness` which are used to help create the environment defined in your scenarios. The provided controllers can only get you so far and if you are interacting with many contracts for a single protocol you may find it advantageous to use the controller pattern for code reuse. Ideally use the provided traits where applicable to help guide you. 
+
+
