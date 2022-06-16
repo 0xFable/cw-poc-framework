@@ -4,3 +4,11 @@ use cw_multi_test::{App};
 pub trait Driver {
     fn init_contracts(router: &mut App, owner: &Addr) -> Self;
 }
+
+// A DexDriver is a trait which includes common operations which usually have similar inputs 
+pub trait DexDriver {
+    fn deposit_liquidity();
+    fn withdraw_liquidity();
+    fn create_pair();
+}
+
