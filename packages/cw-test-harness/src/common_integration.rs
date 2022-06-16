@@ -1,4 +1,4 @@
-use cw_multi_test::{next_block, Contract, App, ContractWrapper};
+use cw_multi_test::{Contract, App, ContractWrapper};
 use cosmwasm_std::{Empty};
 
 use cw20_base;
@@ -28,7 +28,7 @@ pub fn contract_cw20_token() -> Box<dyn Contract<Empty>> {
 // A more generic abstraction of the setup and store process. 
 // For this fn, pass a preexisting setup func, you know what you need but ensure the result is a
 // Box<dyn Contract<Empty>> of some variant so that we can directly store it for you and return the code ID
-fn setup_and_store_contract(app: &mut App, setup_fn: fn() -> Box<dyn Contract<Empty>>) -> u64 {
+pub fn setup_and_store_contract(app: &mut App, setup_fn: fn() -> Box<dyn Contract<Empty>>) -> u64 {
     app.store_code(setup_fn())
 }
 
@@ -50,7 +50,7 @@ pub fn store_token_code(app: &mut App, platform: Option<AvailablePlatforms> ) ->
                 terraswap_token::contract::query,
         ));
         },
-        _ => panic!("Unsupported platform"),
+        // _ => panic!("Unsupported platform"),
     }
 
     app.store_code(wrapped_token_contract)
@@ -74,7 +74,7 @@ pub fn store_pair_code(app: &mut App, platform: Option<AvailablePlatforms>) -> u
                 terraswap_pair::contract::query,
             ));
             }
-        _ => panic!("Unsupported platform")
+        // _ => panic!("Unsupported platform")
     }
     
     app.store_code(pair_contract)
@@ -105,7 +105,7 @@ pub fn store_factory_code(app: &mut App, platform: Option<AvailablePlatforms>) -
                 .with_reply(terraswap_factory::contract::reply),
             );
         }
-        _ => panic!("Unsupported platform")
+        // _ => panic!("Unsupported platform")
     }
     
     app.store_code(factory_contract)
