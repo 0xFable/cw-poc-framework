@@ -1,6 +1,6 @@
 
 use crate::common_integration::{store_pair_code, store_factory_code, store_token_code, AvailablePlatforms};
-use crate::driver_abstraction::{Driver};
+use crate::traits::traits::{Driver, DexDriver};
 use cosmwasm_std::{Addr};
 use cw_multi_test::{App};
 use schemars::JsonSchema;
@@ -18,11 +18,17 @@ impl Driver for AstroportController{
         let factory_code_id = store_factory_code(app, Some(AvailablePlatforms::ASTROPORT));
         let astro_token_variant_id = store_token_code(app, Some(AvailablePlatforms::ASTROPORT));
 
+        
+
         // TODO: Update returns 
         Self {
            0: owner.clone()
         }
     }
+}
+
+impl DexDriver for AstroportController{
+
 }
 
 impl AstroportController {
