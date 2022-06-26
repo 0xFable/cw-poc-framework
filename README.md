@@ -1,7 +1,17 @@
-# cw-poc-framework
-A framework for creating PoC's for Cosmwasm Smart Contracts in a painless and intuitive way. Based on solana-poc-framework
+# cw-poc-framework, cw-test-harness, cw-mock-querier
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com)
+[![first-timers-only](https://img.shields.io/badge/first--timers--only-friendly-blue.svg?style=flat-square)](https://www.firsttimersonly.com/)
+[![Twitter handle][]][Twitter badge]
 
-Maybe this will be renamed to terra-poc-framework as right now its main focus is on cosmwasm based contracts in Terra and currently uses a Terra based fork of some libraries. 
+[Twitter handle]: https://img.shields.io/twitter/follow/0xFab1e.svg?style=social&label=Follow
+[Twitter badge]: https://twitter.com/intent/follow?screen_name=0xFab1e
+
+| Package | Compatible with Cosmwasm Version                                                                                            | Docs                                                                | Description                                                                                                                                  |
+|---------------|-------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| cw-poc-framework           | [![cosmwasm_std on crates.io](https://img.shields.io/crates/v/cosmwasm-std.svg)](https://crates.io/crates/cosmwasm_std)          | [![Docs](https://docs.rs/cw1/badge.svg)](https://github.com/0xFable/cw-poc-framework/tree/main/packages/cw-poc-framework)       | Quickly create exploits or audit findings as-code which are both reproducible and quickly verifiable using a full suite of instantiated contracts. |
+| cw-test-harness          | [![cosmwasm_std on crates.io](https://img.shields.io/crates/v/cosmwasm-std.svg)](https://crates.io/crates/cosmwasm_std)          | [![Docs](https://docs.rs/cw1/badge.svg)](https://github.com/0xFable/cw-poc-framework/tree/main/packages/cw-test-harness)       | A Rust package designed to provide an importable test harness into your tests :-)  |
+| cw-mock-querier        | [![cosmwasm_std on crates.io](https://img.shields.io/crates/v/cosmwasm-std.svg)](https://crates.io/crates/cosmwasm_std)          | [![Docs](https://docs.rs/cw1/badge.svg)](https://github.com/0xFable/cw-poc-framework/tree/main/packages/cw-mock-querier)       | One mock querier to rule them all, import this one instead of defining your own every time. |
+ 
 
 **DISCLAIMER: any illegal usage of this framework is heavily discouraged. Most projects on Terra or chains which use CosmWasm offer a more than generous bug bounty.**
 
@@ -20,7 +30,7 @@ This framework was made for security researchers, to facilitate a fast and conve
 
 ### Mocks
 
-A series of full-functionality contract mocks are saved for multiple protocols with the intent of making it relatively easily to replicate a given environemnt which most closely reflects the environment your test project has. For example, lets say you are auditing, pentesting or otherwise doing some discovery into exploits on a protocol that is heavily integrated with Terraswap; in order to do this in a local prototyping manner we would need to manually collect, store and deploy various contracts in order for the protocol we want to test against to actually work. 
+A series of full-functionality contract mocks are saved for multiple protocols with the intent of making it relatively easily to replicate a given environment which most closely reflects the environment your test project has. For example, lets say you are auditing, pentesting or otherwise doing some discovery into exploits on a protocol that is heavily integrated with Terraswap; in order to do this in a local prototyping manner we would need to manually collect, store and deploy various contracts in order for the protocol we want to test against to actually work. 
 
 The provided mocks take away alot of the complexity that comes from creating a lab from which to develop exploits against a protocol and gives you more time to focus on actually testing the protocols features. 
 
